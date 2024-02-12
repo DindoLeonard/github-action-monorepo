@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - 'github-actions/github-actions/**'
-      - '.github/workflows/ci-cd.yaml'
+      - "github-actions/github-actions/**"
+      - ".github/workflows/ci-cd.yaml"
   push:
     branches:
       - main
     paths:
-      - 'github-actions/github-actions/**'
-      - '.github/workflows/ci-cd.yaml'
+      - "github-actions/github-actions/**"
+      - ".github/workflows/ci-cd.yaml"
   workflow_dispatch:
 
 jobs:
@@ -33,6 +33,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Navigate to app
+        run: cd github-actions/github-actions
 
       - name: Install dependencies
         run: npm install
