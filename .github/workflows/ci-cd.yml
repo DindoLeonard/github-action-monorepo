@@ -1,0 +1,44 @@
+name: example CI/CD
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'github-actions/github-actions/**'
+      - '.github/workflows/ci-cd.yaml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'github-actions/github-actions/**'
+      - '.github/workflows/ci-cd.yaml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Run tests
+        run: npm run test
