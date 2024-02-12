@@ -38,10 +38,10 @@ jobs:
         run: cd github-actions/github-actions
 
       - name: Install dependencies
-        run: npm install
+        run: cd github-actions/github-actions && npm install
 
       - name: Build
-        run: npm run build
+        run: cd github-actions/github-actions && npm run build
 
       - name: Run tests
-        run: npm run test
+        run: cd github-actions/github-actions && npm run test
